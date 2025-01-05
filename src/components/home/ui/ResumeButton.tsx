@@ -1,4 +1,3 @@
-import LocalConfig from "@/constants/config";
 import Link from "next/link";
 
 const ResumeButton = () => {
