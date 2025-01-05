@@ -16,34 +16,34 @@ const HomeSection1 = ({ id }: Readonly<{ id: string }>) => {
     >
       <ConstrainedBox classNames="px-4 py-8 pt-16 z-20 items-center justify-center">
         <Column classNames="w-full items-center justify-center">
-          <div className="inline-flex items-center">
-            <p className="text-2xl/normal sm:text-3xl/normal md:text-5xl/normal lg:text-6xl/normal xl:text-7xl/normal dark:text-[var(--textColor)] text-[var(--textColor)] font-bold text-center">
+          <div className="inline-flex flex-wrap items-center justify-center">
+            <p className="text-xl sm:text-2xl md:text-3xl lg:text-5xl xl:text-6xl dark:text-[var(--textColor)] text-[var(--textColor)] font-bold text-center">
               Hi there, I am
             </p>
             <FlipWords
-              words={["Himanshu Singh", "@himanshusingh."]}
-              className="text-2xl/normal sm:text-3xl/normal md:text-5xl/normal lg:text-6xl/normal xl:text-7xl/normal dark:text-[var(--primaryColor)] text-[var(--primaryColor)] font-bold text-center"
+              words={["Himanshu Singh", "@himanshu6386."]}
+              className="text-xl sm:text-2xl md:text-3xl lg:text-5xl xl:text-6xl dark:text-[var(--primaryColor)] text-[var(--primaryColor)] font-bold text-center"
             />
           </div>
-          <p className="text-sm/normal md:text-base/normal dark:text-[var(--textColorLight)] text-[var(--textColorLight)]">
-            Frontent Developer 💻 SDE 🛠️
+          <p className="text-sm sm:text-base dark:text-[var(--textColorLight)] text-[var(--textColorLight)]">
+            Frontend Developer 💻 SDE 🛠️
           </p>
 
-          <div className="gap-4 mt-12 lg:mt-16 flex flex-col md:flex-row items-center justify-between">
+          <div className="gap-4 mt-8 sm:mt-12 lg:mt-16 flex flex-col sm:flex-row items-center justify-between">
             <TalkButton />
             <Link
               href="https://drive.google.com/file/d/1FrldjubBu6tIfgKUvXV9ss_yDZ5qXtSl/view?usp=sharing"
               passHref
             >
-              <span className="inline-block px-6 py-2  bg-blue-500 text-white rounded-lg text-center cursor-pointer hover:bg-blue-600">
+              <span className="inline-block px-6 py-2 bg-blue-500 text-white rounded-lg text-center cursor-pointer hover:bg-blue-600">
                 View Resume
               </span>
             </Link>
           </div>
         </Column>
 
-        <div className="mt-12 lg:mt-16 w-full flex flex-col items-center">
-          <p className="text-base/6 font-medium">Follow me here</p>
+        <div className="mt-8 sm:mt-12 lg:mt-16 w-full flex flex-col items-center">
+          <p className="text-base sm:text-lg font-medium">Follow me here</p>
 
           <Row classNames="mt-2 gap-2">
             {socialLinks.slice(0, 5).map((link, index) => {
@@ -55,7 +55,7 @@ const HomeSection1 = ({ id }: Readonly<{ id: string }>) => {
                   className="app__outlined_btn !rounded-full !p-2 lg:!p-3 !aspect-square !border-[var(--textColor)]"
                   aria-label={`${link.name}`}
                 >
-                  <span className="text-base/6 text-[var(--whiteColor)]">
+                  <span className="text-base sm:text-lg text-[var(--whiteColor)]">
                     {typeof link.icon === "string" ? null : (
                       <FontAwesomeIcon icon={link.icon} />
                     )}

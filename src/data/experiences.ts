@@ -8,7 +8,7 @@ const experiences: IExperienceItem[] = [
     isCurrentJob: true,
     location: "Bangalore, Remote",
     description: [
-      "Refactored an MVP website into a production-ready application using Next.js.",
+      "Refactored MVP website into a production-ready application using Next.js.",
       "Streamlined guest check-in flow, order management, campaign management, and feedback collection.",
       "Created a QR code generation system with customizable features to enhance operational efficiency.",
     ],
