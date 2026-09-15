@@ -1,6 +1,5 @@
 import {
   faGithub,
-  faInstagram,
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
@@ -24,12 +23,6 @@ const socialLinks: ISocialLinkItem[] = [
     url: "mailto:Himanshu638684@gmail.com",
     icon: faEnvelope,
     text: "Himanshu638684@gmail.com",
-  },
-  {
-    name: "Instagram",
-    url: "https://www.instagram.com/_himanshu6386_",
-    icon: faInstagram,
-    text: "Himanshu Singh",
   },
 ];
 

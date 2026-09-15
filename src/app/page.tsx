@@ -1,20 +1,22 @@
-import dynamic from "next/dynamic";
-
-const PageBox = dynamic(() => import("@/components/core/PageBox"));
-const HomeSection1 = dynamic(() => import("@/components/home/Section1"));
-const HomeSection3 = dynamic(() => import("@/components/home/Section3"));
-const HomeSection4 = dynamic(() => import("@/components/home/Section4"));
-const HomeSection5 = dynamic(() => import("@/components/home/Section5"));
-const HomeSection6 = dynamic(() => import("@/components/home/Section6"));
+import PageBox from "@/components/core/PageBox";
+import Hero from "@/components/home/Hero";
+import About from "@/components/home/About";
+import Experience from "@/components/home/Experience";
+import Skills from "@/components/home/Skills";
+import Projects from "@/components/home/Projects";
+import Contact from "@/components/home/Contact";
+import Footer from "@/components/home/Footer";
 
 const Home = () => {
   return (
     <PageBox>
-      <HomeSection1 id="hero" />
-      <HomeSection3 id="experiences" />
-      <HomeSection4 id="skills" />
-      <HomeSection5 id="projects" />
-      <HomeSection6 id="contact" />
+      <Hero id="hero" />
+      <About id="about" />
+      <Experience id="experience" />
+      <Skills id="skills" />
+      <Projects id="projects" />
+      <Contact id="contact" />
+      <Footer />
     </PageBox>
   );
 };
