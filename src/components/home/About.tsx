@@ -7,6 +7,13 @@ import Strings from "@/constants/strings";
 export default function About({ id }: { id: string }) {
   const edu = education[0];
 
+  const stats = [
+    { label: "Availability", value: "Immediate" },
+    { label: "Industry exp", value: "1 yr" },
+    { label: "Intern + freelance", value: "1.5+ yrs" },
+    { label: "DSA solved", value: "300+" },
+  ];
+
   return (
     <section
       id={id}
@@ -64,21 +71,16 @@ export default function About({ id }: { id: string }) {
           </Reveal>
 
           <Reveal delay={0.2}>
-            <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-              {[
-                { label: "Availability", value: "Immediate" },
-                { label: "Industry exp", value: "1 yr" },
-                { label: "Intern + freelance", value: "1.5+ yrs" },
-                { label: "DSA solved", value: "300+" },
-              ].map((stat) => (
+            <div className="grid grid-cols-2 gap-3">
+              {stats.map((stat) => (
                 <div
                   key={stat.label}
-                  className="min-w-0 bg-[var(--bg-elevated)] p-3 sm:p-4"
+                  className="flex min-h-[5.75rem] flex-col justify-between bg-[var(--bg-elevated)] p-4"
                 >
-                  <p className="display break-words text-xl font-bold leading-tight text-[var(--accent)] sm:text-2xl md:text-3xl">
+                  <p className="whitespace-nowrap text-2xl font-semibold tracking-tight text-[var(--accent)] sm:text-[1.75rem]">
                     {stat.value}
                   </p>
-                  <p className="mono mt-1 text-[10px] uppercase tracking-[0.14em] text-[var(--muted)]">
+                  <p className="mono mt-3 text-[10px] uppercase tracking-[0.14em] text-[var(--muted)]">
                     {stat.label}
                   </p>
                 </div>
