@@ -1,7 +1,30 @@
 "use client";
 
+import { Fragment } from "react";
 import Reveal from "@/components/common/Reveal";
 import experiences from "@/data/experiences";
+
+const METRIC_PATTERN =
+  /(~?\d+(?:\.\d+)?(?:x\b|%|\+)|\d+(?:\.\d+)?s\b|~?\d+-(?:minute|step))/gi;
+
+function Highlighted({ text }: { text: string }) {
+  // The pattern has a single capturing group, so String.split alternates
+  // [plain, match, plain, match, ...] — odd indices are always the metric matches.
+  const parts = text.split(METRIC_PATTERN);
+  return (
+    <>
+      {parts.map((part, i) =>
+        i % 2 === 1 ? (
+          <strong key={i} className="font-semibold text-[var(--accent)]">
+            {part}
+          </strong>
+        ) : (
+          <Fragment key={i}>{part}</Fragment>
+        )
+      )}
+    </>
+  );
+}
 
 export default function Experience({ id }: { id: string }) {
   return (
@@ -45,16 +68,24 @@ export default function Experience({ id }: { id: string }) {
                   </p>
                 </div>
 
-                <ul className="space-y-3">
-                  {exp.description.map((line) => (
-                    <li
-                      key={line}
-                      className="relative pl-4 text-sm leading-relaxed text-[var(--ink-soft)] before:absolute before:left-0 before:top-[0.65em] before:h-1 before:w-1 before:rounded-full before:bg-[var(--accent)] sm:text-base"
-                    >
-                      {line}
-                    </li>
-                  ))}
-                </ul>
+                <div>
+                  {exp.shortDescription ? (
+                    <p className="mb-3 text-sm font-medium leading-relaxed text-[var(--ink)] sm:text-base">
+                      <Highlighted text={exp.shortDescription} />
+                    </p>
+                  ) : null}
+
+                  <ul className="space-y-3">
+                    {exp.description.map((line) => (
+                      <li
+                        key={line}
+                        className="relative pl-4 text-sm leading-relaxed text-[var(--ink-soft)] before:absolute before:left-0 before:top-[0.65em] before:h-1 before:w-1 before:rounded-full before:bg-[var(--accent)] sm:text-base"
+                      >
+                        <Highlighted text={line} />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </article>
             </Reveal>
           ))}

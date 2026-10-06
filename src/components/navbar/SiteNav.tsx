@@ -8,6 +8,7 @@ import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { INavItem } from "@/types";
 import Strings from "@/constants/strings";
 import { cn } from "@/utils/cn";
+import { OPEN_ASK_WIDGET_EVENT } from "@/components/common/AskAboutMeWidget";
 
 export default function SiteNav({ navItems }: { navItems: INavItem[] }) {
   const [scrolled, setScrolled] = useState(false);
@@ -73,6 +74,19 @@ export default function SiteNav({ navItems }: { navItems: INavItem[] }) {
 
           <nav className="hidden items-center gap-7 md:flex" aria-label="Primary">
             {navItems.map((item) => {
+              if (item.link === "#ask-widget") {
+                return (
+                  <button
+                    key={item.link}
+                    type="button"
+                    onClick={() => window.dispatchEvent(new CustomEvent(OPEN_ASK_WIDGET_EVENT))}
+                    className="mono text-xs uppercase tracking-[0.18em] text-[var(--muted)] transition-colors hover:text-[var(--ink)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+                  >
+                    {item.name}
+                  </button>
+                );
+              }
+
               const id = item.link.replace("/#", "");
               const isActive = active === id;
               return (
@@ -137,13 +151,26 @@ export default function SiteNav({ navItems }: { navItems: INavItem[] }) {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.05 * i }}
                 >
-                  <Link
-                    href={item.link}
-                    onClick={() => setOpen(false)}
-                    className="display text-3xl font-semibold"
-                  >
-                    {item.name}
-                  </Link>
+                  {item.link === "#ask-widget" ? (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setOpen(false);
+                        window.dispatchEvent(new CustomEvent(OPEN_ASK_WIDGET_EVENT));
+                      }}
+                      className="display text-3xl font-semibold"
+                    >
+                      {item.name}
+                    </button>
+                  ) : (
+                    <Link
+                      href={item.link}
+                      onClick={() => setOpen(false)}
+                      className="display text-3xl font-semibold"
+                    >
+                      {item.name}
+                    </Link>
+                  )}
                 </motion.div>
               ))}
               <a

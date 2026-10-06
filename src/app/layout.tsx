@@ -3,6 +3,7 @@ import { Syne, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import { ReactNode } from "react";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
+import { Analytics } from "@vercel/analytics/next";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { navMenus } from "@/data/navMenus";
@@ -43,6 +44,7 @@ export const metadata: Metadata = {
 
 const SiteNav = dynamic(() => import("@/components/navbar/SiteNav"));
 const ScrollToTop = dynamic(() => import("@/components/common/ScrollToTop"));
+const AskAboutMeWidget = dynamic(() => import("@/components/common/AskAboutMeWidget"));
 
 const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
   return (
@@ -57,6 +59,8 @@ const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
           {children}
         </main>
         <ScrollToTop />
+        <AskAboutMeWidget />
+        <Analytics />
       </body>
     </html>
   );
