@@ -6,10 +6,9 @@ Status: Immediate joiner, open to Noida, Delhi, Gurgaon, Bangalore, Pune, Hydera
 Contact: Himanshu638684@gmail.com · +91-6386845325 · github.com/Himu25 · linkedin.com/in/Himanshu255
 
 SUMMARY
-Software Engineer with 1 year of full-time experience at MAQ Software and 1+ year of internship
-experience, building scalable backend services and full-stack web applications using Node.js,
-TypeScript, React, PostgreSQL and Redis. Improved a data pipeline's ingestion speed 6x and built an
-LLM-powered AI voice agent. Solved 300+ DSA problems on LeetCode and other platforms.
+Backend-focused Software Engineer with 1 year at MAQ Software and 1+ year of internships
+(MobiGuest, Nixon Bit), specializing in Node.js, TypeScript, PostgreSQL and Redis. Experienced in
+REST APIs, multi-tenant systems, Kafka and LLM-powered agents. Immediate joiner.
 
 EDUCATION
 Indian Institute of Information Technology (IIIT) Una, Himachal Pradesh, India
@@ -18,24 +17,25 @@ B.Tech in Computer Science and Engineering, 2021 – 2025
 EXPERIENCE
 
 MAQ Software — Software Engineer I, Noida, India (On-site), June 2025 – May 2026
-- Secured a multi-tenant monitoring platform using Microsoft Entra ID authentication, tenant-scoped
-  request isolation, and role-based access control (RBAC) for dashboard views and actions.
-- Reduced dashboard load time 75% (2.4s to 0.6s) by partitioning PostgreSQL telemetry tables by day,
-  adding BRIN indexes, and serving charts from pre-aggregated minute/hour/day rollups.
-- Cut database read load by adding Redis query caching with per-granularity TTLs and per-tenant
-  rate limiting, so one busy tenant can't slow down others.
-- Increased telemetry ingestion throughput 6x by building Azure Event Hubs consumers that bulk-load
-  data with PostgreSQL COPY and idempotent upserts, making failed batches safe to retry.
+- Built 10+ REST APIs in Node.js and TypeScript serving dashboard charts for capacity utilization,
+  workspace usage, throttling, top consumers and operation trends, with time-range filters and
+  request validation.
+- Secured the multi-tenant platform with JWT authentication middleware, tenant-scoped request
+  isolation and role-based access control (RBAC) on API routes and dashboard actions.
+- Cut dashboard query latency by 75% (2.4s to 0.6s) using PostgreSQL daily partitioning with
+  partition pruning to skip irrelevant days, plus BRIN indexes for time-range scans.
+- Reduced database read load with a Redis cache-aside strategy, TTLs and cache invalidation on data
+  refresh; added per-tenant rate limiting so one busy tenant cannot slow others.
 
 MobiGuest — Software Development Intern, Bangalore, India (Remote), November 2023 – December 2024
-- Reduced manual front-desk work 60% by building a 5-step digital guest check-in flow (ID upload,
+- Reduced manual front-desk work by 60% by building a 5-step digital guest check-in flow (ID upload,
   room selection, preferences, payment) in React and Redux with persisted form state.
-- Migrated hotel business logic from Firebase Functions to Node.js REST APIs with schema
-  validation, standardized responses, and structured logging.
-- Integrated 30+ REST APIs into the Next.js hotel portal with consistent loading, error, and toast
-  states.
-- Built a drag-and-resize QR page builder with React-RND and the OpenAI API for branded digital
-  menus and guest-service pages with AI-generated backgrounds.
+- Improved production debuggability by migrating hotel business logic from Firebase Functions to
+  Node.js REST APIs with schema validation, standardized responses and structured logging.
+- Integrated 30+ REST APIs into the Next.js hotel portal with consistent loading, error and toast
+  states, keeping every screen predictable under slow or failed API calls.
+- Built a drag-and-resize QR page builder with React-RND and the OpenAI API, enabling hotels to
+  design branded digital menus and guest-service pages with AI-generated backgrounds.
 
 Nixon Bit — Frontend Intern, Noida, India (Remote), July 2023 – October 2023
 - Built the frontend architecture for a CDR (call-detail record) analysis platform used by law
@@ -73,10 +73,10 @@ AI Blog (IIITU) — Next.js, Prisma, MongoDB, NextAuth
 
 SKILLS
 Languages: JavaScript, TypeScript, Java
-Backend: Node.js, Express.js, Fastify, REST APIs, Microservices, Caching, Rate Limiting
-Frontend: React, Next.js, Redux, Tailwind CSS, HTML, CSS
+Backend: Node.js, Express.js, REST APIs, JWT, Microservices, Caching (Cache-Aside), Rate Limiting
+Frontend: React, Next.js, Redux, HTML, CSS
 Databases: PostgreSQL, MongoDB, MySQL, Redis
-Messaging & Real-time: Azure Event Hubs, Kafka, Socket.IO (Redis adapter), BullMQ
+Messaging & Real-time: Kafka, Socket.IO (Redis adapter)
 Cloud & DevOps: Azure, Firebase, Docker, Kubernetes, Git, Linux
 AI & LLMs: AI Agents, LLM Function Calling, MCP, Prompt Guardrails, Groq, OpenAI API, Claude,
 GitHub Copilot

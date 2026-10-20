@@ -1,5 +1,5 @@
 import "./globals.scss";
-import { Syne, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
+import { Space_Grotesk, IBM_Plex_Sans, JetBrains_Mono } from "next/font/google";
 import { ReactNode } from "react";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
@@ -11,11 +11,11 @@ import Strings from "@/constants/strings";
 
 config.autoAddCss = false;
 
-const syne = Syne({
+const display = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
-  weight: ["500", "600", "700", "800"],
+  weight: ["500", "600", "700"],
 });
 
 const plexSans = IBM_Plex_Sans({
@@ -25,18 +25,20 @@ const plexSans = IBM_Plex_Sans({
   weight: ["400", "500", "600"],
 });
 
-const plexMono = IBM_Plex_Mono({
+const mono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
   display: "swap",
-  weight: ["400", "500"],
+  weight: ["400", "500", "700"],
 });
 
+export const viewport = { themeColor: "#f8fafc" };
+
 export const metadata: Metadata = {
-  title: `${Strings.fullName} · Backend Engineer | Immediate Joiner`,
+  title: `${Strings.fullName} · Backend Engineer`,
   description: `${Strings.seeking}. ${Strings.tagline} ${Strings.openLocationsLabel}.`,
   openGraph: {
-    title: `${Strings.fullName} · Backend Engineer | Immediate Joiner`,
+    title: `${Strings.fullName} · Backend Engineer`,
     description: `${Strings.seeking}. ${Strings.openLocationsLabel}.`,
     type: "website",
   },
@@ -50,7 +52,7 @@ const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
   return (
     <html
       lang="en"
-      className={`${syne.variable} ${plexSans.variable} ${plexMono.variable}`}
+      className={`${display.variable} ${plexSans.variable} ${mono.variable}`}
     >
       <body>
         <div className="grain" aria-hidden />

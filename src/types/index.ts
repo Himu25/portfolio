@@ -24,6 +24,8 @@ export interface IExperienceItem {
   location: string;
   shortDescription?: string;
   description: string[];
+  logo?: string;
+  linkedInUrl?: string;
 }
 
 export enum RepoType {
@@ -49,6 +51,10 @@ export interface IProjectItem {
   tags?: string[];
   screenshots?: string[];
   about?: string;
+  highlights?: {
+    backend: string[];
+    frontend: string[];
+  };
 }
 
 export type IServiceItem = {

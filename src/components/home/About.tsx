@@ -1,104 +1,97 @@
 "use client";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight, faBolt, faRobot, faShieldHalved } from "@fortawesome/free-solid-svg-icons";
 import Reveal from "@/components/common/Reveal";
 import education from "@/data/education";
 import Strings from "@/constants/strings";
 
+const FOCUS = [
+  {
+    icon: faBolt,
+    title: "Performance",
+    body: "Fast queries, smart caching and APIs that stay quick as traffic grows.",
+  },
+  {
+    icon: faShieldHalved,
+    title: "Reliability & security",
+    body: "Authentication, access control and rate limiting built in from day one.",
+  },
+  {
+    icon: faRobot,
+    title: "AI-powered features",
+    body: "LLM agents and function calling wired into real products.",
+  },
+];
+
 export default function About({ id }: { id: string }) {
   const edu = education[0];
 
-  const stats = [
-    { label: "Availability", value: "Immediate" },
-    { label: "Industry exp", value: "1 yr" },
-    { label: "Intern + freelance", value: "1.5+ yrs" },
-    { label: "DSA solved", value: "300+" },
+  const details = [
+    { label: "Experience", value: "1 yr full-time · 1+ yr internships" },
+    { label: "Education", value: `B.Tech CSE, IIIT Una · ${edu.period}` },
+    { label: "Location", value: `${Strings.location} · open to relocate` },
   ];
 
   return (
-    <section
-      id={id}
-      className="section-pad relative w-full max-w-full overflow-x-hidden"
-    >
-      <div className="site-shell grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
+    <section id={id} className="section-pad relative">
+      <div className="site-shell grid gap-12 lg:grid-cols-2 lg:gap-20">
         <Reveal>
-          <p className="mono text-xs uppercase tracking-[0.24em] text-[var(--accent)]">
-            About
-          </p>
-          <h2 className="display mt-4 text-3xl font-bold sm:text-4xl md:text-5xl">
-            Backend engineer focused on scalable systems and Agentic AI.
+          <p className="eyebrow">about</p>
+          <h2 className="display mt-4 text-4xl font-bold md:text-5xl">
+            I make backends <span className="text-gradient">fast, safe,</span> and ready for AI.
           </h2>
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-[var(--ink-soft)] sm:text-lg">
+            I&apos;m a backend-focused software engineer who enjoys turning messy problems into simple,
+            dependable systems. I&apos;ve shipped work across enterprise SaaS, hotel tech and analytics
+            products, from APIs and databases to the screens people use.
+          </p>
+
+          <dl className="mt-8 max-w-xl divide-y divide-[var(--line)] border-y border-[var(--line)]">
+            {details.map((d) => (
+              <div key={d.label} className="flex flex-col gap-1 py-3.5 sm:flex-row sm:gap-6">
+                <dt className="mono w-28 shrink-0 text-xs uppercase tracking-[0.12em] text-[var(--muted)] sm:pt-0.5">
+                  {d.label}
+                </dt>
+                <dd className="text-sm text-[var(--ink)] sm:text-[15px]">{d.value}</dd>
+              </div>
+            ))}
+            <div className="flex flex-col gap-1 py-3.5 sm:flex-row sm:gap-6">
+              <dt className="mono w-28 shrink-0 text-xs uppercase tracking-[0.12em] text-[var(--muted)] sm:pt-0.5">
+                Status
+              </dt>
+              <dd className="flex items-center gap-2 text-sm font-medium text-[var(--ink)] sm:text-[15px]">
+                <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                {Strings.availability}
+              </dd>
+            </div>
+          </dl>
         </Reveal>
 
-        <div className="space-y-8">
-          <Reveal delay={0.08}>
-            <p className="text-base leading-relaxed text-[var(--ink-soft)] sm:text-lg">
-              Immediate joiner looking for Backend and Agentic AI roles. Software
-              Engineer with 1 year of industry experience and 1.5+ years of
-              internship and freelance work building scalable backends,
-              distributed systems, REST APIs, and production applications.
-            </p>
-          </Reveal>
-
-          <Reveal delay={0.12}>
-            <div className="border border-[var(--line)] bg-[var(--bg-elevated)] p-4 sm:p-5">
-              <p className="mono text-xs uppercase tracking-[0.18em] text-[var(--muted)]">
-                Open locations
-              </p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {Strings.openLocations.map((city) => (
-                  <span
-                    key={city}
-                    className="border border-[var(--line)] bg-white px-3 py-1.5 text-sm text-[var(--ink-soft)]"
-                  >
-                    {city}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.16}>
-            <div className="border-l-2 border-[var(--accent)] pl-5">
-              <p className="mono text-xs uppercase tracking-[0.18em] text-[var(--muted)]">
-                Education
-              </p>
-              <p className="mt-2 text-lg font-semibold">{edu.school}</p>
-              <p className="text-[var(--ink-soft)]">{edu.degree}</p>
-              <p className="mono mt-1 text-sm text-[var(--muted)]">
-                {edu.period} · {edu.location}
-              </p>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.2}>
-            <div className="grid grid-cols-2 gap-3">
-              {stats.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="flex min-h-[5.75rem] flex-col justify-between bg-[var(--bg-elevated)] p-4"
-                >
-                  <p className="whitespace-nowrap text-2xl font-semibold tracking-tight text-[var(--accent)] sm:text-[1.75rem]">
-                    {stat.value}
-                  </p>
-                  <p className="mono mt-3 text-[10px] uppercase tracking-[0.14em] text-[var(--muted)]">
-                    {stat.label}
-                  </p>
+        <Reveal delay={0.08} className="lg:pt-10">
+          <p className="mono text-xs uppercase tracking-[0.14em] text-[var(--muted)]">What I focus on</p>
+          <ul className="mt-5 space-y-3">
+            {FOCUS.map((f) => (
+              <li key={f.title} className="card flex gap-4 rounded-xl p-5">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--accent-soft)] text-[var(--accent)]">
+                  <FontAwesomeIcon icon={f.icon} />
+                </span>
+                <div>
+                  <h3 className="font-semibold text-[var(--ink)]">{f.title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-[var(--ink-soft)]">{f.body}</p>
                 </div>
-              ))}
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.24}>
-            <a
-              href={Strings.dsaProfileLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mono text-xs uppercase tracking-[0.18em] text-[var(--accent)] underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
-            >
-              DSA profile →
-            </a>
-          </Reveal>
-        </div>
+              </li>
+            ))}
+          </ul>
+          <a
+            href={Strings.dsaProfileLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mono mt-6 inline-flex items-center gap-2 text-xs text-[var(--accent)] hover:underline"
+          >
+            300+ DSA problems solved <FontAwesomeIcon icon={faArrowRight} className="text-[10px]" />
+          </a>
+        </Reveal>
       </div>
     </section>
   );
