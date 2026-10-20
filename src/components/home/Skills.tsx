@@ -2,100 +2,58 @@
 
 import Image from "next/image";
 import skills from "@/data/skills";
-import { SkillLevel } from "@/types";
+import Reveal from "@/components/common/Reveal";
+import TiltCard from "@/components/common/TiltCard";
 
-const levelLabel: Record<SkillLevel, string> = {
-  [SkillLevel.Expert]: "Expert",
-  [SkillLevel.Intermediate]: "Intermediate",
-  [SkillLevel.Beginner]: "Familiar",
-};
+const fileName = (title: string) =>
+  title.toLowerCase().replace(/&/g, "").replace(/\s+/g, "-").replace(/-+/g, "-") + ".ts";
 
 export default function Skills({ id }: { id: string }) {
-  const marqueeSkills = [
-    ...skills.flatMap((group) => group.items),
-    ...skills.flatMap((group) => group.items),
-  ];
-
   return (
-    <section id={id} className="section-pad relative w-full max-w-full overflow-x-hidden">
+    <section id={id} className="section-pad relative">
       <div className="site-shell">
-        <div>
-          <p className="mono text-xs uppercase tracking-[0.24em] text-[var(--accent)]">
-            Skills
-          </p>
-          <h2 className="display mt-4 max-w-2xl text-4xl font-bold md:text-5xl">
-            Tools I use to move systems from idea to production.
+        <Reveal>
+          <p className="eyebrow">skills</p>
+          <h2 className="display mt-4 max-w-3xl text-4xl font-bold md:text-5xl">
+            The stack I ship <span className="text-gradient">production code</span> with.
           </h2>
-        </div>
+        </Reveal>
 
-        <div className="mt-10 space-y-10 md:mt-14 md:space-y-12">
-          {skills.map((group) => (
-            <div key={group.title}>
-              <h3 className="mono mb-4 text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
-                {group.title}
-              </h3>
-
-              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
-                {group.items.map((skill) => (
-                  <div
-                    key={skill.title}
-                    className="group flex flex-col items-center gap-3 border border-[var(--line)] bg-[var(--bg-elevated)] px-3 py-5 text-center transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent)] hover:bg-white sm:px-4 sm:py-6"
-                  >
-                    <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-white shadow-[0_1px_0_rgba(11,18,32,0.06)] transition-transform duration-300 group-hover:scale-105 sm:h-14 sm:w-14">
-                      {skill.icon ? (
-                        <Image
-                          src={skill.icon}
-                          alt={skill.title}
-                          width={36}
-                          height={36}
-                          className="h-8 w-8 object-contain sm:h-9 sm:w-9"
-                        />
-                      ) : (
-                        <span className="display text-lg font-bold text-[var(--accent)]">
-                          {skill.title.slice(0, 1)}
-                        </span>
-                      )}
-                    </span>
-
-                    <div>
-                      <p className="text-sm font-semibold leading-snug text-[var(--ink)] sm:text-base">
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {skills.map((group, i) => (
+            <Reveal key={group.title} delay={i * 0.04} className="h-full">
+              <TiltCard max={6} className="card h-full overflow-hidden rounded-xl">
+                <div className="flex items-center gap-2 border-b border-[var(--line)] bg-[var(--bg)] px-4 py-2.5">
+                  <span className="flex gap-1">
+                    <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f56]" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-[#ffbd2e]" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-[#27c93f]" />
+                  </span>
+                  <span className="mono ml-2 text-xs text-[var(--muted)]">{fileName(group.title)}</span>
+                </div>
+                <div className="tilt-pop px-4 pb-5 pt-4">
+                  <p className="mono text-[13px]">
+                    <span className="text-[#cf222e]">export const</span>{" "}
+                    <span className="text-[#0550ae]">{group.title.split(" ")[0].toLowerCase()}</span>{" "}
+                    <span className="text-[var(--muted)]">= [</span>
+                  </p>
+                  <ul className="mt-3 flex flex-wrap gap-2 pl-3">
+                    {group.items.map((skill) => (
+                      <li
+                        key={skill.title}
+                        className="inline-flex items-center gap-2 rounded-md border border-[var(--line)] bg-white px-2.5 py-1.5 text-sm text-[var(--ink)] transition-colors hover:border-[var(--accent)]"
+                      >
+                        {skill.icon ? (
+                          <Image src={skill.icon} alt="" width={18} height={18} className="h-[18px] w-[18px] object-contain" />
+                        ) : null}
                         {skill.title}
-                      </p>
-                      {typeof skill.level === "number" ? (
-                        <p className="mono mt-1 text-[10px] uppercase tracking-[0.14em] text-[var(--muted)]">
-                          {levelLabel[skill.level]}
-                        </p>
-                      ) : null}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="relative mt-14 w-full max-w-full overflow-hidden border-y border-[var(--line)] bg-[var(--ink)] py-3 text-[#f3f6f9] md:mt-16 md:py-4">
-        <div className="marquee-track gap-8 px-4 md:gap-10">
-          {marqueeSkills.map((skill, idx) => (
-            <span
-              key={`${skill.title}-${idx}`}
-              className="inline-flex shrink-0 items-center gap-3 whitespace-nowrap"
-            >
-              {skill.icon ? (
-                <Image
-                  src={skill.icon}
-                  alt=""
-                  width={22}
-                  height={22}
-                  className="h-5 w-5 rounded-sm bg-white object-contain p-0.5"
-                />
-              ) : null}
-              <span className="display text-lg font-semibold tracking-tight md:text-2xl">
-                {skill.title}
-              </span>
-              <span className="text-[var(--accent)]">/</span>
-            </span>
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="mono mt-3 text-[13px] text-[var(--muted)]">];</p>
+                </div>
+              </TiltCard>
+            </Reveal>
           ))}
         </div>
       </div>

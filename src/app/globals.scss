@@ -3,16 +3,18 @@
 @tailwind utilities;
 
 :root {
-  --bg: #e6ebf0;
-  --bg-elevated: #f3f6f9;
+  --bg: #f8fafc;
+  --bg-elevated: #ffffff;
   --ink: #0b1220;
-  --ink-soft: #243044;
-  --muted: #5b667a;
-  --line: rgba(11, 18, 32, 0.12);
-  --accent: #0e7490;
-  --accent-soft: rgba(14, 116, 144, 0.12);
+  --ink-soft: #334155;
+  --muted: #64748b;
+  --line: rgba(15, 23, 42, 0.1);
+  --accent: #2563eb;
+  --accent-2: #0891b2;
+  --accent-soft: rgba(37, 99, 235, 0.08);
   --signal: #c2410c;
-  --max-width: 1120px;
+  --code-bg: #0d1117;
+  --max-width: 1180px;
 }
 
 * {
@@ -33,10 +35,9 @@ body {
 }
 
 body {
-  background:
-    radial-gradient(ellipse 70% 45% at 8% -8%, rgba(14, 116, 144, 0.16), transparent 55%),
-    radial-gradient(ellipse 55% 35% at 92% 5%, rgba(11, 18, 32, 0.06), transparent 50%),
-    linear-gradient(180deg, #edf1f5 0%, var(--bg) 45%, #dce3ea 100%);
+  background-color: var(--bg);
+  background-image: radial-gradient(rgba(15, 23, 42, 0.08) 1px, transparent 1px);
+  background-size: 22px 22px;
   color: var(--ink);
   font-family: var(--font-body), "IBM Plex Sans", sans-serif;
   font-size: 1rem;
@@ -86,8 +87,8 @@ img {
 
 .display {
   font-family: var(--font-display), "Syne", sans-serif;
-  letter-spacing: -0.04em;
-  line-height: 0.95;
+  letter-spacing: -0.035em;
+  line-height: 1;
 }
 
 .mono {
@@ -99,7 +100,7 @@ img {
   position: fixed;
   inset: 0;
   z-index: 1;
-  opacity: 0.28;
+  opacity: 0.12;
   mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
 }
@@ -142,4 +143,81 @@ img {
 
 .float-soft {
   animation: float-soft 6s ease-in-out infinite;
+}
+
+.card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--line);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 12px 32px -18px rgba(15, 23, 42, 0.18);
+}
+
+.text-gradient {
+  background: linear-gradient(100deg, var(--accent-2) 0%, var(--accent) 70%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Section labels styled like code comments: // about */
+.eyebrow {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.8rem;
+  color: var(--accent);
+}
+
+.eyebrow::before {
+  content: "// ";
+  color: var(--muted);
+}
+
+.tilt-card {
+  --rx: 0deg;
+  --ry: 0deg;
+  --gx: 50%;
+  --gy: 50%;
+  transform: rotateX(var(--rx)) rotateY(var(--ry));
+  transform-style: preserve-3d;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+.tilt-card .tilt-glare {
+  background: radial-gradient(500px circle at var(--gx) var(--gy), rgba(37, 99, 235, 0.07), transparent 45%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.tilt-card:hover .tilt-glare {
+  opacity: 1;
+}
+
+.tilt-pop {
+  transform: translateZ(30px);
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.caret {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.1em;
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  background: #58a6ff;
+  animation: blink 1s steps(1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tilt-card {
+    transform: none !important;
+  }
+  .marquee-track,
+  .float-soft,
+  .caret {
+    animation: none;
+  }
 }

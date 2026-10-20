@@ -2,7 +2,7 @@ import Strings from "@/constants/strings";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-[var(--line)] py-8">
+    <footer className="border-t border-[var(--line)] pb-24 pt-8">
       <div className="site-shell flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <p className="display text-lg font-semibold">
           {Strings.fullName}

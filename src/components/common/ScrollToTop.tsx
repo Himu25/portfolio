@@ -24,7 +24,7 @@ export default function ScrollToTop() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 12 }}
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="fixed bottom-[max(5.75rem,calc(env(safe-area-inset-bottom)+5.75rem))] right-[max(1rem,env(safe-area-inset-right))] z-50 flex h-11 w-11 items-center justify-center bg-[var(--ink)] text-[#f3f6f9] shadow-sm transition-colors hover:bg-[var(--accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+          className="fixed bottom-[max(4.5rem,calc(env(safe-area-inset-bottom)+4.5rem))] right-[max(1rem,env(safe-area-inset-right))] z-50 flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--line)] bg-white text-[var(--ink)] shadow-sm transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
         >
           <FontAwesomeIcon icon={faArrowUp} />
         </motion.button>

@@ -5,7 +5,7 @@ const projects: IProjectItem[] = [
     id: "shipgoods",
     title: "ShipGoods",
     description:
-      "Logistics platform with an LLM voice agent, real-time driver tracking, and fleet visibility across a 100 km search radius.",
+      "On-demand goods-transport platform with live driver tracking, dynamic pricing, and an AI voice assistant that calls riders inside the app.",
     icon: "/skills/nextjs.png",
     repoType: RepoType.Public,
     projectType: ProjectType.Personal,
@@ -14,58 +14,122 @@ const projects: IProjectItem[] = [
     tags: [
       "Next.js",
       "Node.js",
+      "Express",
       "MongoDB",
       "Redis",
       "Kafka",
       "Socket.IO",
       "Groq LLM",
+      "Stripe",
       "Docker",
       "Kubernetes",
     ],
-    about:
-      "Built an LLM-powered AI voice agent that calls riders in-app when their driver is 5 km away and on arrival, answering ETA, driver, and car-finder questions in Hindi via Groq function calling over 6 guarded tools. Scaled real-time driver tracking horizontally with the Socket.IO Redis adapter over JWT-authenticated sockets, and streamed validated driver locations through a Kafka pipeline into MongoDB, matching bookings to drivers within 100 km using geospatial queries.",
+    highlights: {
+      backend: [
+        "Scaled real-time tracking with the Socket.IO Redis adapter, using JWT-authenticated sockets and room-based delivery (user:<id>, driver:<id>) instead of broadcasts.",
+        "Built a driver-location pipeline that rejects implausible GPS jumps, caches the latest position in Redis with a TTL, and streams updates through Kafka into MongoDB.",
+        "Matched bookings to nearby drivers and vehicles with a MongoDB 2dsphere index and $geoNear queries.",
+        "Made booking acceptance race-safe with an atomic findOneAndUpdate on the pending status, so two drivers can never claim the same job.",
+        "Wrote a pricing engine: base fare plus per-km rate by vehicle type, with night, long-distance, weather and traffic surcharges.",
+        "Built an LLM voice agent on Groq function calling: tools re-verify booking ownership, ETA uses Google Routes with an OSRM fallback, guardrails block prompt injection and secret leaks, and Redis NX locks dedupe calls.",
+      ],
+      frontend: [
+        "Next.js App Router with middleware-based, role-aware routing for user, driver and admin dashboards.",
+        "Live map with React-Leaflet and Leaflet Routing Machine, with driver markers updated over Socket.IO.",
+        "In-app voice calls using the Web Speech API (Hindi/Hinglish) for recognition and Web Audio for playback.",
+        "Redux Toolkit auth state persisted in cookies, Stripe Elements checkout, and ApexCharts fleet analytics.",
+      ],
+    },
   },
   {
     id: "bidkaro",
     title: "BidKaro",
     description:
-      "Real-time auction platform with secure authentication and smooth bidding flows.",
+      "Real-time auction marketplace that uses Redis as its primary database for items, bids, sessions, search and rankings.",
     icon: "/skills/svelte.svg",
     repoType: RepoType.Public,
     projectType: ProjectType.Personal,
     githubUrl: "https://github.com/Himu25/BidKaro.git",
     url: "https://bid-karo.vercel.app",
-    tags: ["Svelte", "TypeScript", "Node.js", "Redis"],
-    about:
-      "A real-time auction platform: live bid updates, secure authentication, and race-condition-safe bidding flows backed by Redis.",
+    tags: ["SvelteKit", "TypeScript", "Node.js", "Redis", "RediSearch", "Lua", "Chart.js"],
+    highlights: {
+      backend: [
+        "Modelled the whole domain in Redis: hashes for items and users, sorted sets ranking items by price, views and ending time, and sets for likes.",
+        "Serialized concurrent bids with a distributed lock (SET NX PX with a random token) and a Lua compare-and-delete unlock, aborting work if the lock expires.",
+        "Counted unique views in one Lua script: HyperLogLog (PFADD) dedupes viewers, then the item counter and views ranking update atomically.",
+        "Full-text search with a RediSearch index over name, description, price and ending time, with weighted title matches and fuzzy partial terms.",
+        "Auth with scrypt salted password hashes and Keygrip-signed cookie sessions, plus Redis page caching for static routes.",
+        "Found common interests between users with Redis set intersections (SINTER) of liked items.",
+      ],
+      frontend: [
+        "SvelteKit with server endpoints and TypeScript end to end.",
+        "Bid-history price chart built with Chart.js and a Luxon time axis.",
+        "Debounced live search, item carousels and a Tailwind CSS UI.",
+      ],
+    },
   },
   {
     id: "ticketing-app",
     title: "Ticketing App",
     description:
-      "Microservices ticketing platform with auth, ticket trading, and Stripe payments.",
+      "Event-driven ticket marketplace split into auth, tickets, orders, payments and expiration microservices on Kubernetes.",
     icon: "/skills/kubernetes.svg",
     repoType: RepoType.Public,
     projectType: ProjectType.Personal,
     githubUrl: "https://github.com/Himu25/Ticketing_app",
-    tags: ["Next.js", "TypeScript", "Docker", "Kubernetes", "Stripe", "NATS"],
-    about:
-      "A microservices-based ticket marketplace split into independent auth, tickets, orders, payments, and expiration services that communicate over a NATS event bus, each one containerized and orchestrated with Kubernetes/Skaffold.",
+    tags: [
+      "TypeScript",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "NATS Streaming",
+      "Bull",
+      "Stripe",
+      "Docker",
+      "Kubernetes",
+      "Jest",
+    ],
+    highlights: {
+      backend: [
+        "Database-per-service design: each service owns its MongoDB and communicates only through NATS Streaming events.",
+        "Optimistic concurrency control with document versioning (mongoose-update-if-current), so out-of-order events can't corrupt replicated ticket data.",
+        "Queue groups with manual acknowledgements for reliable at-least-once event processing.",
+        "Order expiry handled by a Bull (Redis) delayed job that cancels unpaid orders and releases the reserved ticket.",
+        "Published my own npm package (@tiknow/common) for shared errors, auth middleware and typed event contracts.",
+        "Route tests with Jest, Supertest and mongodb-memory-server; Docker images, Kubernetes deployments, NGINX ingress and a Skaffold dev loop.",
+      ],
+      frontend: [
+        "Next.js App Router that fetches data server-side through the in-cluster ingress, forwarding cookies for auth.",
+        "Reusable useRequest hook for API calls with unified loading and error handling.",
+        "Flows to sell tickets, place orders, track order status and pay with Stripe.",
+      ],
+    },
   },
   {
     id: "ai-blog",
     title: "AI Blog",
     description:
-      "Blog platform with AI-generated content and secure NextAuth authentication.",
+      "Blogging platform for IIIT Una students with Google/GitHub sign-in, a rich-text editor and AI-assisted writing.",
     icon: "/skills/nextjs.png",
     repoType: RepoType.Public,
     projectType: ProjectType.Personal,
     githubUrl: "https://github.com/Himu25/AIBlog-IIITU",
     url: "https://ai-blog-iiitu.vercel.app",
-    tags: ["Next.js", "Prisma", "MongoDB", "NextAuth"],
+    tags: ["Next.js", "Prisma", "MongoDB", "NextAuth", "Gemini API", "Cloudinary", "Tailwind CSS"],
     screenshots: ["/images/projects/ai-blog.png"],
-    about:
-      "A blogging platform built for IIIT Una students, with category browsing, a trending/top-picks rail, and secure NextAuth-based login for publishing posts.",
+    highlights: {
+      backend: [
+        "Next.js route handlers for posts, categories, comments and a most-viewed feed.",
+        "Prisma schema on MongoDB modelling users, OAuth accounts, sessions, categories, posts and comments.",
+        "Paginated, category-filtered feeds that fetch the page and total count in one Prisma transaction, with atomic view-count increments.",
+        "NextAuth with Google and GitHub OAuth through the Prisma adapter, guarding the write and comment endpoints.",
+      ],
+      frontend: [
+        "Rich-text editor (React Quill, loaded client-only) with Cloudinary image uploads.",
+        "Gemini API integration to generate and regenerate story drafts from a prompt.",
+        "Category browsing, trending and editor's-pick rails, pagination, and a top progress bar.",
+      ],
+    },
   },
 ];
 
